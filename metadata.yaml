@@ -1,7 +1,7 @@
 homepage: "https://cookiefy.app"
 documentation: "https://cookiefy.app/docs/gtm-integration"
 versions:
-  - sha: PLACEHOLDER_COMMIT_SHA
+  - sha: 7117501a49c108c7c0c301b702fd0e35d6f8bcbe
     changeNotes: |
       Initial release v1.0.0
       - Google Consent Mode v2 support with all required consent types
