@@ -27,10 +27,14 @@ A Google Tag Manager template for [Cookiefy](https://cookiefy.app) cookie consen
 3. Click **Add to workspace**
 
 ### Option 2: Manual Import
-1. Download the `.tpl` file from this repository
+1. Download **`template.tpl`** from this repository (repo root).
 2. In GTM, go to **Templates** > **Tag Templates** > **New**
 3. Click the three-dot menu > **Import**
-4. Select the downloaded file
+4. Select the file.
+
+**Windows / GTM export tip:** If the browser saves `template (2).tpl`, rename it to **`template.tpl`** before committing or sharing—the gallery and this repo expect that exact name.
+
+**Publishing to Google’s gallery:** See **[GALLERY-SUBMIT.md](./GALLERY-SUBMIT.md)**.
 
 ## Configuration
 
