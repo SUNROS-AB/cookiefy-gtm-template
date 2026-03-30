@@ -1,6 +1,9 @@
 homepage: "https://cookiefy.app"
 documentation: "https://cookiefy.app/docs/gtm-integration"
 versions:
+  - sha: 6ec37b1409b4f76d50aeefd0bfbd333b3f1d6d2d
+    changeNotes: |
+      Template update from maintainer (GTM-valid export).
   - sha: 0f1ee3a90a72474fe7eecbc920b1d5b72deba707
     changeNotes: |
       Resync template.tpl from GTM export; normalize Domain ID (trim + lowercase).
