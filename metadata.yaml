@@ -1,6 +1,9 @@
 homepage: "https://cookiefy.app"
 documentation: "https://cookiefy.app/docs/gtm-integration"
 versions:
+  - sha: 0f1ee3a90a72474fe7eecbc920b1d5b72deba707
+    changeNotes: |
+      Resync template.tpl from GTM export; normalize Domain ID (trim + lowercase).
   - sha: dbd22072257d2c14321ecc1908e583ade1f39268
     changeNotes: |
       Normalize Domain ID with trim + lowercase in the tag (e.g. Nrg.se → nrg.se) so CDN config URLs match the dashboard.
