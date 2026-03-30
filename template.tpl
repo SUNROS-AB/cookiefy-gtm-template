@@ -281,8 +281,8 @@ const gtagSet = require('gtagSet');
 const getContainerVersion = require('getContainerVersion');
 const JSON = require('JSON');
 
-// Get template parameters
-const domainId = data.domainId;
+// Get template parameters (domain IDs are case-insensitive like DNS)
+const domainId = data.domainId ? ('' + data.domainId).trim().toLowerCase() : '';
 const waitParsed = parseInt(data.waitForUpdate, 10);
 const waitForUpdate = !isNaN(waitParsed) ? waitParsed : 500;
 
