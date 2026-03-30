@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -250,6 +250,14 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "defaultValue": "500",
         "help": "Time in milliseconds to wait for consent update before firing tags. Default: 500ms"
+      },
+      {
+        "type": "TEXT",
+        "name": "developerId",
+        "displayName": "Google CMP Developer ID (optional)",
+        "simpleValueType": true,
+        "defaultValue": "dZTk4Ym",
+        "help": "Cookiefy's Google-issued CMP developer ID (dZTk4Ym). Sets gtag developer_id.* for attribution. Clear for white-label or non-Cookiefy builds."
       }
     ]
   }
@@ -275,7 +283,8 @@ const JSON = require('JSON');
 
 // Get template parameters
 const domainId = data.domainId;
-const waitForUpdate = data.waitForUpdate || 500;
+const waitParsed = parseInt(data.waitForUpdate, 10);
+const waitForUpdate = !isNaN(waitParsed) ? waitParsed : 500;
 
 // Build default consent state
 const defaultConsent = {
@@ -321,6 +330,15 @@ if (data.enableAdsDataRedaction) {
   log('Cookiefy: Ads data redaction enabled');
 }
 
+if (data.developerId) {
+  const rawDev = ('' + data.developerId).trim();
+  if (rawDev) {
+    const devSuffix = rawDev.replace(/^developer_id\./, '');
+    gtagSet('developer_id.' + devSuffix, true);
+    log('Cookiefy: Developer ID applied');
+  }
+}
+
 // Check for existing consent cookie
 const cookieName = 'cookiefy_consent';
 const consentCookie = getCookieValues(cookieName);
@@ -345,10 +363,15 @@ if (consentCookie && consentCookie.length > 0) {
   }
 }
 
-// Set up config for Cookiefy banner
+// Set up config for Cookiefy banner (consent defaults stay in GTM; optional flags kept for parity / future use)
+const trimmedDev = data.developerId ? ('' + data.developerId).trim().replace(/^developer_id\./, '') : '';
 setInWindow('cookieConsentConfig', {
   domainId: domainId,
-  enableGoogleConsentMode: false // Disable in banner since GTM handles it
+  enableGoogleConsentMode: false,
+  googleConsentWaitForUpdate: waitForUpdate,
+  googleConsentUrlPassthrough: !!data.enableUrlPassthrough,
+  googleConsentAdsDataRedaction: !!data.enableAdsDataRedaction,
+  googleDeveloperId: trimmedDev
 }, true);
 
 // Function to handle consent updates from Cookiefy banner
@@ -1050,7 +1073,7 @@ Features:
 - Updates consent when user interacts with banner
 - Supports all Google Consent Mode v2 consent types
 - Region-specific consent defaults
-- URL passthrough and ads data redaction options
+- URL passthrough, ads data redaction, optional CMP developer ID
 
 Usage:
 1. Add this tag to your GTM container
