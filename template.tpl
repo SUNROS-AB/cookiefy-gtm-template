@@ -1,4 +1,4 @@
-___TERMS_OF_SERVICE___
+﻿___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -273,8 +273,8 @@ const gtagSet = require('gtagSet');
 const getContainerVersion = require('getContainerVersion');
 const JSON = require('JSON');
 
-// Get template parameters (domain IDs are case-insensitive like DNS)
-const domainId = data.domainId ? ('' + data.domainId).trim().toLowerCase() : '';
+// Get template parameters
+const domainId = data.domainId;
 const waitForUpdate = data.waitForUpdate || 500;
 
 // Build default consent state
